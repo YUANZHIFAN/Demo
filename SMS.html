@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>学生成绩管理系统</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+
+    .head{
+      width: 100%;
+      height: 70px;
+      text-align: center;
+      line-height: 70px;
+      background-color: cornflowerblue;
+    }
+    .box{
+      width: 100%;
+      min-width: 1250px;
+      height: 70px;
+    }
+
+    li{
+      position: relative;
+      top: 20px;
+      list-style-type: none;
+      float: left;
+      margin-left: 10px;
+    }
+
+    input, select{
+      width: 100px;
+      height: 35px;
+      border-radius: 10px;
+      padding-left: 10px;
+      border: 1px solid slategrey;
+      outline: none;
+    }
+
+    .box button{
+      position: relative;
+      top: 17px;
+    }
+
+    button{
+      height: 40px;
+      border-radius: 10px;
+      background-color: #4CAF50;
+      border: none;
+      outline: none;
+      font-size: 1em;
+    }
+
+    .btn-query{
+      width: 80px;
+      float: left;
+      margin-left: 20px;
+    }
+
+    .btn-right{
+      width: 140px;
+      float: right;
+      margin-right: 30px;
+    }
+
+    th, td{
+      width: 310px;
+      height: 50px;
+      text-align: center;
+    }
+
+    table,th,td{
+      border-bottom: 1px solid slategray;
+      border-collapse:collapse;
+    }
+
+    .new-results-bg{
+      display: none;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.3);
+      z-index: 0;
+    }
+
+    .new-results-box{
+      display: none;
+      z-index: 1;
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      width: 300px;
+      height: 320px;
+      background-color: aliceblue;
+      border-radius: 10px;
+    }
+
+    .new-results-box-tittle{
+      position: relative;
+      top: 20px;
+      text-align: center;
+    }
+
+    .new-results-box-cover{
+      position: relative;
+      margin: 30px 40px;
+    }
+
+    .new-results-box input{
+      width: 200px;
+      margin: 5px;
+    }
+
+    .new-results-box-btn{
+      position: relative;
+      left: 10px;
+      margin-top: 10px;
+    }
+
+    .new-results-box-btn button{
+      width: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="head">
+    <h1>学生成绩管理系统</h1>
+  </div>
+  <div class="box">
+    <ul>
+      <li><input type="text" placeholder="输入姓名"></li>
+      <li><input type="text" placeholder="输入班级"></li>
+      <li><input type="text" placeholder="输入班级排名"></li>
+      <li><input type="text" placeholder="输入年级排名"></li>
+      <li>
+        <input list="browsers" type="text" placeholder="选择年级">
+          <datalist id="browsers">
+            <option value="初一">
+            <option value="初二">
+            <option value="初三">
+            <option value="高一">
+            <option value="高二">
+            <option value="高三">
+          </datalist>
+      </li>
+      <li><input type="text" placeholder="输入分数"></li>
+    </ul>
+    <button class="btn-query">查询</button>
+    <button class="btn-right">>>&nbsp;生成成绩报表</button>
+    <button class="btn-right" onclick="newRresults()">+&nbsp;新增学生成绩</button>
+  </div>
+  <div>
+    <table>
+      <tr>
+        <th>姓名</th>
+        <th>分数</th>
+        <th>班级排名</th>
+        <th>年级排名</th>
+        <th>年级</th>
+        <th>班级</th>
+      </tr>
+      <tr>
+        <td>小明</td>
+        <td>666</td>
+        <td>6</td>
+        <td>66</td>
+        <td>高三</td>
+        <td>6班</td>
+      </tr>
+      <tr>
+        <td>小丽</td>
+        <td>589</td>
+        <td>15</td>
+        <td>126</td>
+        <td>高三</td>
+        <td>6班</td>
+      </tr>
+      <tr>
+        <td>李蕾</td>
+        <td>486</td>
+        <td>36</td>
+        <td>275</td>
+        <td>初三</td>
+        <td>12班</td>
+      </tr>
+      <tr>
+        <td>张乐乐</td>
+        <td>562</td>
+        <td>20</td>
+        <td>143</td>
+        <td>高一</td>
+        <td>16班</td>
+      </tr>
+      <tr>
+        <td>小明</td>
+        <td>666</td>
+        <td>6</td>
+        <td>66</td>
+        <td>高三</td>
+        <td>6班</td>
+      </tr>
+      <tr>
+        <td>小丽</td>
+        <td>589</td>
+        <td>15</td>
+        <td>126</td>
+        <td>高三</td>
+        <td>6班</td>
+      </tr>
+      <tr>
+        <td>李蕾</td>
+        <td>486</td>
+        <td>36</td>
+        <td>275</td>
+        <td>初三</td>
+        <td>12班</td>
+      </tr>
+      <tr>
+        <td>张乐乐</td>
+        <td>562</td>
+        <td>20</td>
+        <td>143</td>
+        <td>高一</td>
+        <td>16班</td>
+      </tr>
+      <tr>
+        <td>小明</td>
+        <td>666</td>
+        <td>6</td>
+        <td>66</td>
+        <td>高三</td>
+        <td>6班</td>
+      </tr>
+      <tr>
+        <td>小丽</td>
+        <td>589</td>
+        <td>15</td>
+        <td>126</td>
+        <td>高三</td>
+        <td>6班</td>
+      </tr>
+      <tr>
+        <td>李蕾</td>
+        <td>486</td>
+        <td>36</td>
+        <td>275</td>
+        <td>初三</td>
+        <td>12班</td>
+      </tr>
+      <tr>
+        <td>张乐乐</td>
+        <td>562</td>
+        <td>20</td>
+        <td>143</td>
+        <td>高一</td>
+        <td>16班</td>
+      </tr>
+    </table>
+  </div>
+  <div class="new-results">
+    <div class="new-results-bg" id="new-results-bg"></div>
+    <div class="new-results-box" id="new-results-box">
+      <div class="new-results-box-tittle">
+        <h3>录入学生成绩信息</h3>
+      </div>
+      <div class="new-results-box-cover">
+        <input type="text" placeholder="输入姓名">
+        <input type="text" placeholder="输入班级">
+        <input list="browsers" type="text" placeholder="选择年级">
+          <datalist id="browsers">
+            <option value="初一">
+            <option value="初二">
+            <option value="初三">
+            <option value="高一">
+            <option value="高二">
+            <option value="高三">
+          </datalist>
+        <input type="text" placeholder="输入分数">
+        <div class="new-results-box-btn">
+          <button class="results-box-btn">提交</button>
+          <button class="results-box-btn" onclick="closeRresults()">取消</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+      var bg = document.getElementById("new-results-bg");
+      var box = document.getElementById("new-results-box");
+      function newRresults(){
+        bg.style.display = "block";
+        box.style.display = "block";
+      }
+      function closeRresults(){
+        bg.style.display = "none";
+        box.style.display = "none";
+      }
+
+      console.log("版本号: V 1.0.0");
+      console.log("芝兰生于山谷");
+      console.log("不以穷困而改志");
+      console.log("君子修身养德");
+      console.log("不以穷困而改志");
+      console.log("——————DD");
+    </script>
+</body>
+</html>
